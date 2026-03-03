@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YAMDHUD INSTA SERVER</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: linear-gradient(135deg,#6a00f4,#ff007f);
+      color: white;
+      text-align: center;
+    }
+
+    h1 {
+      padding: 20px;
+      font-size: 26px;
+    }
+
+    .box {
+      background: rgba(0,0,0,0.4);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(255,0,150,0.5);
+    }
+
+    input, select {
+      width: 90%;
+      padding: 12px;
+      margin: 10px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      background: #2a2a2a;
+      color: white;
+    }
+
+    button {
+      width: 95%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(90deg,#ff00cc,#ff0000);
+      color: white;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .title {
+      font-size: 18px;
+      margin-top: 15px;
+    }
+  </style>
+
+</head>
+<body>
+
+<h1>✨ YAMDHUD INSTA SARVAR ✨</h1>
+
+<div class="box">
+
+  <div class="title">LOGIN PANEL</div>
+
+  <input type="text" id="username" placeholder="USERNAME DAL">
+  <input type="password" id="password" placeholder="PASSWORD DAL">
+
+  <button onclick="login()">LOGIN KAR BDK</button>
+
+  <hr>
+
+  <div class="title">BOT CONTROL</div>
+
+  <select id="mode">
+    <option>Auto Reply</option>
+    <option>AI Chat</option>
+  </select>
+
+  <input type="text" id="target" placeholder="TARGET USERNAME DAL">
+  <input type="text" id="reply" placeholder="MESSAGE DAL">
+
+  <input type="number" id="time" placeholder="TIME (seconds)">
+
+  <button onclick="startBot()">ISTAR KAR 😈</button>
+
+</div>
+
+<script>
+function login(){
+  fetch("/login", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+      username: document.getElementById("username").value,
+      password: document.getElementById("password").value
+    })
+  })
+  .then(res=>res.json())
+  .then(data=>alert(data.message));
+}
+
+function startBot(){
+  fetch("/start", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({
+      mode: document.getElementById("mode").value,
+      target: document.getElementById("target").value,
+      reply: document.getElementById("reply").value,
+      time: document.getElementById("time").value
+    })
+  })
+  .then(res=>res.json())
+  .then(data=>alert(data.message));
+}
+</script>
+
+</body>
+</html>
